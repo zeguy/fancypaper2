@@ -9,6 +9,6 @@
 
     </head>
     <body>
-    Welcome to FancyPaper!
+        <h1>Welcome to FancyPaper!<h1>
     </body>
 </html>
