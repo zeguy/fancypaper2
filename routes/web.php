@@ -41,3 +41,5 @@ Route::get('/debug', function () {
     
         dump($debug);
     });
+
+    Route::get('/posters', 'PosterController@index');
