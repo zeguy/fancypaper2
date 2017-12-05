@@ -15,6 +15,7 @@ class CreatePostersTable extends Migration
 		    # Increments method will make a Primary, Auto-Incrementing field.
 		    # Most tables start off this way
             $table->increments('id');
+
             # This generates two columns: `created_at` and `updated_at` to
 		    # keep track of changes to a row
             $table->timestamps();
@@ -22,11 +23,9 @@ class CreatePostersTable extends Migration
             #my fields
             $table->string('title');
             $table->string('artist');
-            $table->boolean('variant'); 
+            $table->boolean('variant')->nullable(); 
             $table->float('cost', 8 , 2);
-            $table->float('ebay', 8, 2);
-            $table->float('shopify', 8, 2);
-            $table->float('ebans', 8, 2);
+            $table->string('image');
         });
     }
     /**

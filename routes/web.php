@@ -42,4 +42,22 @@ Route::get('/debug', function () {
         dump($debug);
     });
 
-    Route::get('/posters', 'PosterController@index');
+Route::get('/posters/breakeven', 'BreakevenController@display');
+Route::post('/posters', 'BreakevenController@calculate');
+
+Route::get('/posters/create', 'PosterController@create');
+Route::post('/posters', 'PosterController@store');
+
+#show the form to edit a specific poster
+Route::get('/posters/{id}/edit', 'PosterController@edit');
+#process the form to edit a specific poster
+Route::put('/posters/{id}', 'PosterController@update');
+
+#show the confirmation page before deletion
+Route::get('/posters/{id}/delete', 'PosterController@delete');
+#process the deletion
+Route::put('/posters/{id}', 'PosterController@confirm');
+
+Route::get('/posters/index', 'PosterController@index');
+Route::get('/posters/{id}', 'PosterController@show');
+
