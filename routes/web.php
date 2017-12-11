@@ -60,6 +60,11 @@ Route::get('/posters/{id}/delete', 'PosterController@delete');
 Route::delete('/posters/{id}', 'PosterController@confirm');
 
 Route::get('/posters/inventory', 'PosterController@inventory');
+
+Route::get('/posters/{id}/sell', 'PosterController@sell');
+Route::post('/posters/{id}', 'PosterController@sold');
+
+Route::get('/posters/sold', 'PosterController@record');
 Route::get('/posters/index', 'PosterController@index');
 Route::get('/posters/{id}', 'PosterController@show');
 

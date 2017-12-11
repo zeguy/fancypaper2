@@ -22,6 +22,7 @@
                     <li><a href="/posters/breakeven">Breakeven</a></li>
                     <li><a href="/posters/index">Posters</a></li>
                     <li><a href='/posters/create'>Add a Poster</a>
+					<li><a href='/posters/sold'>Sales</a>
         		</ul>
       		</div>
     	</nav>

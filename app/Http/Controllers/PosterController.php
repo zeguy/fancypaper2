@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Poster;
 use App\Tag;
+use App\Sale;
 
 class PosterController extends Controller
 {
@@ -144,6 +145,9 @@ class PosterController extends Controller
         return redirect('/posters/'.$id.'/edit')->with('alert', 'Your changes were saved.');
     }
 
+    /**
+    *GET /posters/{id}/delete
+    */
     public function delete($id)
     {
         $poster = Poster::find($id);
@@ -164,4 +168,70 @@ class PosterController extends Controller
 
         return redirect('/posters/index')->with('alert', 'Your poster was deleted.');
     }
+
+    /**
+    *GET /posters/{id}/sell
+    */
+    public function sell($id)
+    {
+        $poster = Poster::find($id);
+
+        if (!$poster) {
+            return redirect('/posters/index')->with('alert', 'poster not found');
+        }
+
+        return view('posters.sell')->with([
+            'poster' => $poster
+        ]);
+        }
+
+    public function sold(Request $request, $id) 
+    {
+        $poster = Poster::find($id);
+        
+        $this->validate($request, [
+            'price' => 'required|min:0|numeric',
+            'platform' => 'required'
+        ]);
+
+        #
+        $sale = new Sale();
+        $sale->title = $poster->title;
+        $sale->artist = $poster->artist;
+        $sale->variant = $poster->variant;
+        $sale->cost = $poster->cost;
+        
+        if ($request->has('shipping')) {
+			$sale->price = $request->input('price') - 25;
+		} else {
+			$sale->price = $request->input('price');
+        }
+        
+		$sale->platform = $request->input('platform');
+        
+        if ($sale->platform == 'ebay') {
+			$sale->profit = $sale->price - round(($poster->cost + 0.3)/0.871);
+		} elseif ($sale->platform =='expresso') {
+			$sale->profit = $sale->price - round(($poster->cost + 0.3)/0.971);
+		} else {
+			$sale->profit = $sale->cost - round(($poster->cost + 0.6)/0.942);
+        }
+        
+        $sale->save();
+        $poster->tags()->detach();
+        $poster->delete();
+    }
+
+    /**
+    * GET /posters/sold
+    */
+    public function record()
+    {
+        $sales = Sale::all();
+
+        return view('posters.record')->with([
+            'sales' => $sales
+        ]);
+    }
+
 } 
