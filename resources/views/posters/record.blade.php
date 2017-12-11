@@ -11,8 +11,26 @@
 @section('content')
 	
     <section id="sold">
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Variant</th>
+                <th>Cost</th>
+                <th>Price Sold</th>
+                <th>Platform</th>
+                <th>Profit</th>
+            </tr>
         @foreach($sales as $sale)
-                {{$sale}} <br>
+            <tr>
+                <td>{{$sale->title}}</td>
+                <td>{{$sale->artist}}</td>
+                <td>{{$sale->variant}}</td>
+                <td>{{$sale->cost}}</td>
+                <td>{{$sale->price}}</td>
+                <td>{{$sale->platform}}</td>
+                <td>{{$sale->profit}}</td>
+            </tr>
         @endforeach
     </section>
 @endsection
