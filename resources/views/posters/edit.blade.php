@@ -26,12 +26,23 @@
         <input type='checkbox' name='variant' id='variant' value='variant'>
 
         <label for='cost'>* cost</label>
-        <input type='number' name='cost' id='cost' value='{{ old('cost', $poster->cost) }} '>
+        <input type='text' name='cost' id='cost' value='{{ old('cost', $poster->cost) }} '>
         @include('modules.error-field', ['fieldName' => 'cost'])
 
         <label for='image'>* Image URL </label>
         <input type='text' max='4' name='image' id='image' value='{{ old('image', $poster->image) }}'>
-        @include('modules.error-field', ['fieldName' => 'image'])      
+        @include('modules.error-field', ['fieldName' => 'image']) 
+        
+        @foreach ($tagsForCheckboxes as $id => $name)
+            <input
+                type='checkbox'
+                value='{{ $id }}'
+                name='tags[]'
+                {{ (isset($tagsForThisPoster) and in_array($name, $tagsForThisPoster)) ? 'CHECKED' : '' }}
+            >
+            {{ $name }} <br>
+        @endforeach                
+             
 
         <input type='submit' value='Save changes' class='btn btn-primary btn-small'>
     </form>

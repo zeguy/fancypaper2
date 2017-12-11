@@ -12,14 +12,6 @@ footer{
     color: white;
 }
 
-.container-fluid a {
-    color: red;
-}
-
-h5 {
-    color: red;
-}
-
 #photos {
   float:left;
   /* Prevent vertical gaps */

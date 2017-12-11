@@ -13,5 +13,6 @@
     {{ $poster->cost }}
     
     <a href='/posters/{{ $poster['id'] }}/edit'>Edit</a> | 
-    <a href='/posters/{{ $poster['id'] }}/delete'>Delete</a>
+    <a href='/posters/{{ $poster['id'] }}/delete'>Delete</a> |
+    <a href='/posters/{{ $poster['id'] }}/sell'>Sell</a>
 @endsection

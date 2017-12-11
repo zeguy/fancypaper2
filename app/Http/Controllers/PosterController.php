@@ -4,14 +4,35 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Poster;
+use App\Tag;
 
 class PosterController extends Controller
 {
+    /**
+    * GET /posters
+    */
     public function index()
     {
         $posters = Poster::all();
 
         return view('posters.index')->with([
+            'posters' => $posters
+        ]);
+    }
+
+    /**
+    * GET /posters/inventory
+    */
+    public function inventory()
+    {
+        $posters = Poster::whereHas('tags', function ($query)
+        {
+            $query->where('name', '=', 'inventory');
+        })->get();
+
+        dump($posters);
+
+        return view('posters.inventory')->with([
             'posters' => $posters
         ]);
     }
@@ -54,8 +75,8 @@ class PosterController extends Controller
         $this->validate($request, [
             'title' => 'required|min:3',
             'artist' => 'required',
-            'cost' => 'required',
-            'image' => 'required',
+            'cost' => 'required|numeric',
+            'image' => 'required|url',
         ]);
 
         $title = $request->input('title');
@@ -72,15 +93,55 @@ class PosterController extends Controller
         return redirect('/posters/index')->with('alert', 'the poster '.$request->input('title').' was added.');
     }
 
+    /**
+    * PUT /posters/{id}
+    */
     public function edit($id)
     {
-        $poster = Poster::find($id);
+        $poster = Poster::with('tags')->find($id);
 
         if (!$poster) {
             return redirect('/posters')->with('alert', 'Poster not found');
         }
 
-        return view('posters.edit')->with(['poster' => $poster]);
+        # Get all the possible tags so we can include them with checkboxes in the view
+        $tagsForCheckboxes = Tag::getForCheckboxes();
+    
+        # Create a simple array of just the tag names for tags associated with this book;
+        # will be used in the view to decide which tags should be checked off
+        $tagsForThisPoster = [];
+        foreach ($poster->tags as $tag) {
+            $tagsForThisPoster[] = $tag->name;
+        }
+        # Results in an array like this: $tagsForThisBook => ['novel', 'fiction', 'classic'];        
+        return view('posters.edit')
+            ->with([
+                'poster' => $poster,
+                'tagsForCheckboxes' => $tagsForCheckboxes,
+                'tagsForThisPoster' => $tagsForThisPoster,
+            ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'title' => 'required|min:3',
+            'artist' => 'required',
+            'cost' => 'required',
+            'image' => 'required',
+        ]);
+
+        $poster = Poster::find($id);       
+        
+        $poster->tags()->sync($request->input('tags'));
+
+        $poster->title = $request->input('title');
+        $poster->artist = $request->input('artist');
+        $poster->cost = $request->input('cost');
+        $poster->image = $request->input('image');
+        $poster->save();
+
+        return redirect('/posters/'.$id.'/edit')->with('alert', 'Your changes were saved.');
     }
 
     public function delete($id)
@@ -88,8 +149,10 @@ class PosterController extends Controller
         $poster = Poster::find($id);
 
         if (!$poster) {
-            return redirect('/posters/index')->with('alert', 'Book not found');
+            return redirect('/posters/index')->with('alert', 'poster not found');
         }
+
+        $poster->tags()->detach();
 
         return view('posters.delete')->with(['poster' => $poster]);
     }
@@ -99,6 +162,6 @@ class PosterController extends Controller
         $poster = Poster::find($id);
         $poster->delete();
 
-        return redirect('/posters/index')->with('alert', 'Your book was deleted.');
+        return redirect('/posters/index')->with('alert', 'Your poster was deleted.');
     }
 } 

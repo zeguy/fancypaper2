@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form method='POST' action='/posters'>
+<form method='POST' action='/posters/breakeven'>
 	{{ csrf_field() }}
 	<fieldset name="breakeven">
 

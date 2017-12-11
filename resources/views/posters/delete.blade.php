@@ -9,11 +9,11 @@
 
     <form method='POST' action='/posters/{{ $poster->id }}'>
 
-        {{ method_field('put') }}
+        {{ method_field('delete') }}
         {{ csrf_field() }}
 
         <input type='submit' value='yes' class='btn btn-primary btn-small'>
-        <a class="btn" href="/posters/{{ $poster->id }}">No!</a>
+        <a class="btn" href='{{ url()->previous() }}'>No!</a>
         
     </form>
 @endsection
