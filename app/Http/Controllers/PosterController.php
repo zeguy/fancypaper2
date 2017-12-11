@@ -220,6 +220,8 @@ class PosterController extends Controller
         $sale->save();
         $poster->tags()->detach();
         $poster->delete();
+
+        return redirect('/posters/sold')->with('alert', 'Your poster was deleted.');
     }
 
     /**
