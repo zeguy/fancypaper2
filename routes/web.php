@@ -45,28 +45,46 @@ Route::get('/debug', function () {
 Route::get('/posters/breakeven', 'BreakevenController@display');
 Route::post('/posters/breakeven', 'BreakevenController@calculate');
 
+Route::group(['middleware' => 'auth'], function () {
 
-Route::get('/posters/create', 'PosterController@create');
-Route::post('/posters', 'PosterController@store');
+	Route::get('/posters/create', 'PosterController@create');
+    Route::post('/posters', 'PosterController@store');
 
-#show the form to edit a specific poster
-Route::get('/posters/{id}/edit', 'PosterController@edit');
-#process the form to edit a specific poster
-Route::put('/posters/{id}', 'PosterController@update');
+    #show the form to edit a specific poster
+    Route::get('/posters/{id}/edit', 'PosterController@edit');
+    #process the form to edit a specific poster
+    Route::put('/posters/{id}', 'PosterController@update');
 
-#show the confirmation page before deletion
-Route::get('/posters/{id}/delete', 'PosterController@delete');
-#process the deletion
-Route::delete('/posters/{id}', 'PosterController@confirm');
+    #show the confirmation page before deletion
+    Route::get('/posters/{id}/delete', 'PosterController@delete');
+    #process the deletion
+    Route::delete('/posters/{id}', 'PosterController@confirm');
 
-Route::get('/posters/inventory', 'PosterController@inventory');
+    Route::get('/posters/art', 'PosterController@art');
+    Route::get('/posters/collection', 'PosterController@collection');
+    Route::get('/posters/film', 'PosterController@film');
+    Route::get('/posters/inventory', 'PosterController@inventory');
 
-Route::get('/posters/{id}/sell', 'PosterController@sell');
-Route::post('/posters/{id}', 'PosterController@sold');
+    Route::get('/posters/{id}/sell', 'PosterController@sell');
+    Route::post('/posters/{id}', 'PosterController@sold');
 
-Route::get('/posters/sold', 'PosterController@record');
-Route::get('/posters/index', 'PosterController@index');
-Route::get('/posters/{id}', 'PosterController@show');
+    Route::get('/posters/sold', 'PosterController@record');
+    Route::get('/posters/index', 'PosterController@index');
+	Route::get('/posters/{id}', 'PosterController@show');
+});
 
+Route::get('/show-login-status', function () {
+    $user = Auth::user();
+
+    if ($user) {
+        dump('You are logged in.', $user->toArray());
+    } else {
+        dump('You are not logged in.');
+    }
+
+    return;
+});
+
+Auth::routes();
 
 

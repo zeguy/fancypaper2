@@ -23,7 +23,7 @@ class PosterTagTableSeeder extends Seeder
         'The Birds' => ['collection', 'film'],
         'Thin Red Line' => ['inventory', 'film'],
         'Liberte, Egalite, Fraternite' => ['inventory', 'art'],
-
+        'Power & Glory Day of the Dead' => ['collection', 'art'],
     ];
 
     # Now loop through the above array, creating a new pivot for each book to tag

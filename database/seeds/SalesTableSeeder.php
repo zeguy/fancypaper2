@@ -31,6 +31,7 @@ class SalesTableSeeder extends Seeder
                 'price' => $sale[4],
                 'platform' => $sale[5],
                 'profit' => $sale[6],
+                'user_id' => 1,
             ]);
             $count--;
         }

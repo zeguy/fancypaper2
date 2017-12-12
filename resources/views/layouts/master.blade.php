@@ -13,20 +13,48 @@
 <body>
 
 	<header>
-		<nav class="navbar navbar-inverse">
-      		<div class="container-fluid">
-        		<div class="navbar-header">
-          			<a class="navbar-brand" href="/">FancyPaper</a>
-        		</div>
-        		<ul class="nav navbar-nav">
-                    <li><a href="/posters/breakeven">Breakeven</a></li>
-                    <li><a href="/posters/index">Posters</a></li>
-                    <li><a href='/posters/create'>Add a Poster</a>
-					<li><a href='/posters/sold'>Sales</a>
-        		</ul>
-      		</div>
-    	</nav>
+		@php
+			# Define a PHP array of links and their labels
+			# Quite a bit of straight PHP code here, but arguably ok
+			# because it's display specific and allows you to edit the link
+			# labels without having to edit a logic file.
+			if(Auth::check()) {
+				$nav = [
+					'posters/breakeven' => 'Breakeven',
+					'posters/index' => 'Posters',
+					'posters/create' => 'Add a poster',
+					'posters/sold' => 'Sales',
+				];
+			} else {
+				$nav = [
+					'register' => 'Register',
+					'login' => 'Login',
+					'posters/breakeven' => 'Breakeven',
+				];
+			}
+		@endphp
+
+		<nav>
+			<ul>
+				@foreach($nav as $link => $label)
+					<li><a href='/{{ $link }}' class='{{ Request::is($link) ? 'active' : '' }}'>{{ $label }}</a>
+				@endforeach
+
+				@if(Auth::check())
+					<li>
+						<form method='POST' id='logout' action='/logout'>
+							{{csrf_field()}}
+							<a href='#' onClick='document.getElementById("logout").submit();'>Logout {{ $user->name }}</a>
+						</form>
+					</li>
+				@endif
+			</ul>
+		</nav>
   	</header>
+	
+	<section>
+    	@yield('subNav')
+	</section>
 
 	<section>
     	@yield('content')

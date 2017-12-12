@@ -6,6 +6,10 @@ body {
     margin-bottom: 0px;
 }
 
+#logout > a {
+  color: red;
+}
+
 footer{
     display:block;
     background-color: #222;

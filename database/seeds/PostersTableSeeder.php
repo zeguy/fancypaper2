@@ -19,6 +19,7 @@ class PostersTableSeeder extends Seeder
             ['The Birds', 'Durieux, Laurent', 1, 192.12, 'https://static1.squarespace.com/static/51237ec3e4b0b5151b78f462/52fbaffce4b05c17d93ff148/52fbb06fe4b05c17d93ff248/1392226416751/the-birds-regular_2014.jpg?format=2500w'],
             ['Thin Red Line', 'Hanuka, Tomer', 1, 100, 'https://cdn.shopify.com/s/files/1/0558/2081/products/thinredlinereg_1024x1024.jpg?v=1453327874'],
             ['Liberte, Egalite, Fraternite', 'Fairey, Shepard', 1, 600, 'https://obeygiant.com/images/2015/12/libertefraterniteobey01.jpeg'],
+            ['Power & Glory Day of the Dead', 'Fairey, Shepard', 1, 200, 'https://obeygiant.com/images/2015/07/POWER-GLORY-Skull-red.jpg'],
         ];
         
         $count = count($posters);
@@ -32,6 +33,7 @@ class PostersTableSeeder extends Seeder
                 'variant' => $poster[2],
                 'cost' => $poster[3],
                 'image' => $poster[4],
+                'user_id' => 1,
             ]);
             $count--;
         }

@@ -10,9 +10,10 @@
 
 @section('content')
 	
-    <section id="sold">
-        <table>
+    <section>
+        <table class='table'>
             <tr>
+                <th>Date</th>
                 <th>Title</th>
                 <th>Artist</th>
                 <th>Variant</th>
@@ -23,6 +24,7 @@
             </tr>
         @foreach($sales as $sale)
             <tr>
+                <td>{{$sale->created_at}}</td>
                 <td>{{$sale->title}}</td>
                 <td>{{$sale->artist}}</td>
                 <td>{{$sale->variant}}</td>
@@ -32,5 +34,6 @@
                 <td>{{$sale->profit}}</td>
             </tr>
         @endforeach
+        </table>
     </section>
 @endsection

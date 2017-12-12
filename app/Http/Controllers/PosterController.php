@@ -10,31 +10,81 @@ use App\Sale;
 class PosterController extends Controller
 {
     /**
-    * GET /posters
+    * GET /posters/index
     */
-    public function index()
+    public function index(Request $request)
     {
-        $posters = Poster::all();
+        $user = $request->user();
+        $tagsForCheckboxes = Tag::getForCheckboxes();
+        
+        if ($user) {
+            $posters= $user->posters()->orderBy('title')->get();    
+        } else {
+            $posters = [];
+        }
 
         return view('posters.index')->with([
-            'posters' => $posters
+            'posters' => $posters,
+            'tagsForCheckboxes' => $tagsForCheckboxes
         ]);
     }
 
     /**
-    * GET /posters/inventory
+    * GET /posters/art
     */
+    public function art()
+    {
+        $tagsForCheckboxes = Tag::getForCheckboxes();
+        $posters = Poster::whereHas('tags', function ($query)
+        {
+            $query->where('name', '=', 'art');
+        })->get();
+
+        return view('posters.art')->with([
+            'posters' => $posters,
+            'tagsForCheckboxes' => $tagsForCheckboxes
+        ]);
+    }
+
+    public function collection()
+    {
+        $tagsForCheckboxes = Tag::getForCheckboxes();
+        $posters = Poster::whereHas('tags', function ($query)
+        {
+            $query->where('name', '=', 'collection');
+        })->get();
+
+        return view('posters.collection')->with([
+            'posters' => $posters,
+            'tagsForCheckboxes' => $tagsForCheckboxes
+        ]);
+    }
+
+    public function film()
+    {
+        $tagsForCheckboxes = Tag::getForCheckboxes();
+        $posters = Poster::whereHas('tags', function ($query)
+        {
+            $query->where('name', '=', 'film');
+        })->get();
+
+        return view('posters.film')->with([
+            'posters' => $posters,
+            'tagsForCheckboxes' => $tagsForCheckboxes
+        ]);
+    }
+
     public function inventory()
     {
+        $tagsForCheckboxes = Tag::getForCheckboxes();
         $posters = Poster::whereHas('tags', function ($query)
         {
             $query->where('name', '=', 'inventory');
         })->get();
 
-        dump($posters);
-
         return view('posters.inventory')->with([
-            'posters' => $posters
+            'posters' => $posters,
+            'tagsForCheckboxes' => $tagsForCheckboxes
         ]);
     }
 
@@ -89,6 +139,7 @@ class PosterController extends Controller
         $poster->variant = $request->input('variant');
         $poster->cost = $request->input('cost');
         $poster->image = $request->input('image');
+        $poster->user_id = $request->user()->id;
         $poster->save();
 
         return redirect('/posters/index')->with('alert', 'the poster '.$request->input('title').' was added.');
@@ -142,7 +193,7 @@ class PosterController extends Controller
         $poster->image = $request->input('image');
         $poster->save();
 
-        return redirect('/posters/'.$id.'/edit')->with('alert', 'Your changes were saved.');
+        return redirect('/posters/index');
     }
 
     /**
@@ -217,6 +268,7 @@ class PosterController extends Controller
 			$sale->profit = $sale->cost - round(($poster->cost + 0.6)/0.942);
         }
         
+        $sale->user_id = $request->user()->id;
         $sale->save();
         $poster->tags()->detach();
         $poster->delete();
@@ -227,10 +279,15 @@ class PosterController extends Controller
     /**
     * GET /posters/sold
     */
-    public function record()
+    public function record(Request $request)
     {
-        $sales = Sale::all();
-
+        $user = $request->user();
+        
+        if ($user) {
+            $sales = $user->sales()->get();
+        } else {
+            $sales = [];
+        }
         return view('posters.record')->with([
             'sales' => $sales
         ]);
