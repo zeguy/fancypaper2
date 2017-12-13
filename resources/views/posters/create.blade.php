@@ -33,7 +33,7 @@
 
         <div class="form-group">
             <label for='image'>* Image URL </label>
-            <input type='text' class="form-control" max='4' name='image' id='image' value='{{ old('image') }}'>
+            <input type='text' class="form-control" name='image' id='image' value='{{ old('image') }}'>
             @include('modules.error-field', ['fieldName' => 'image'])
         </div>
 
