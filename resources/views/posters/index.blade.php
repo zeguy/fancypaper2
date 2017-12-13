@@ -14,7 +14,7 @@
     <section id="photos">
         @foreach($posters as $poster)
             <a href='/posters/{{ $poster['id'] }}'>
-                <img src='{{ $poster['image'] }}'>
+                <img src='{{ $poster['image'] }}' alt='{{ $poster['name'] }}'>
             </a>
         @endforeach
     </section>
