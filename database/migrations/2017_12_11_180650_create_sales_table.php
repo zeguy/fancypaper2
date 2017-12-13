@@ -24,12 +24,12 @@ class CreateSalesTable extends Migration
             
             #my fields
             $table->string('title');
-            $table->string('artist');
-            $table->boolean('variant')->nullable(); 
+            $table->string('artist'); 
             $table->float('cost', 8 , 2);
             $table->float('price', 8 , 2);
             $table->string('platform');
             $table->float('profit', 8 , 2);
+            $table->string('notes')->nullable();
         });
     }
     /**

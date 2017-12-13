@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('posters.nav')
 
 @push('head')
     <link href='/css/fancypaper2.css' rel='stylesheet'>
@@ -8,23 +8,8 @@
     Posters
 @endsection
 
-@section('subNav')
-
-    <header>
-		<nav class="navbar navbar-light">
-      		<div class="container-fluid">
-        		<ul class="nav navbar-nav">
-                    <li><a href="/posters/index">all</a></li>
-                    @foreach ($tagsForCheckboxes as $id => $name)
-                        <li><a href="/posters/{{ $name }}">{{$name}}</a></li>
-                    @endforeach  
-        		</ul>
-      		</div>
-    	</nav>
-  	</header>
-@endsection
-
 @section('content')
+    @parent
 
     <section id="photos">
         @foreach($posters as $poster)

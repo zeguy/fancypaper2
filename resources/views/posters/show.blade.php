@@ -8,9 +8,9 @@
 
 @section('content')
     <h1>{{ $poster->title }}</h1>
-    by {{ $poster->artist }}
-    {{ $poster->variant }}
-    {{ $poster->cost }}
+    by {{ $poster->artist }}<br>
+    &#36;{{ $poster->cost }}<br>
+    {{ $poster->notes }}<br>
     
     <a href='/posters/{{ $poster['id'] }}/edit'>Edit</a> | 
     <a href='/posters/{{ $poster['id'] }}/delete'>Delete</a> |

@@ -10,7 +10,21 @@ body {
   color: red;
 }
 
+body > section{
+  text-align: center;
+  margin:auto;
+}
+
+.form-group {
+  margin:auto;
+}
+.form-control {
+  width: auto;
+  margin: auto;
+}
+
 footer{
+    margin-top: 5px;
     display:block;
     background-color: #222;
     color: white;

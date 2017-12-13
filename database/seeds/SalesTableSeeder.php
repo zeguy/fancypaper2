@@ -13,9 +13,9 @@ class SalesTableSeeder extends Seeder
     public function run()
     {
         $sales = [
-            ['Alien', 'Durieux, Laurent', 1, 90, 199, 'ebay', 63],
-            ['Psycho', 'Danger, Daniel', 1, 140, 400, 'ebay', 238.1],
-            ['Rear Window', 'Durieux, Laurent', 1, 445, 600, 'ebay', 57.3],
+            ['Alien', 'Durieux, Laurent',90, 199, 'ebay', 63, 'reg, mint'],
+            ['Psycho', 'Danger, Daniel', 140, 400, 'ebay', 238.1, 'reg, NM'],
+            ['Rear Window', 'Durieux, Laurent', 445, 600, 'ebay', 57.3, 'reg, mint'],
         ];
         
         $count = count($sales);
@@ -26,11 +26,11 @@ class SalesTableSeeder extends Seeder
                 'updated_at' => Carbon\Carbon::now()->subDays($count)->toDateTimeString(),
                 'title' => $sale[0],
                 'artist' => $sale[1],
-                'variant' => $sale[2],
-                'cost' => $sale[3],
-                'price' => $sale[4],
-                'platform' => $sale[5],
-                'profit' => $sale[6],
+                'cost' => $sale[2],
+                'price' => $sale[3],
+                'platform' => $sale[4],
+                'profit' => $sale[5],
+                'notes' => $sale[6],
                 'user_id' => 1,
             ]);
             $count--;

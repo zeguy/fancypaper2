@@ -14,24 +14,35 @@
 
         <div class='details'>* Required fields</div>
 
-        <label for='title'>* Title</label>
-        <input type='text' name='title' id='title' value='{{ old('title', $poster->title) }}'>
-        @include('modules.error-field', ['fieldName' => 'title'])
+        <div class="form-group">
+            <label for='title'>* Title</label>
+            <input type='text' class="form-control" name='title' id='title' value='{{ old('title', $poster->title) }}'>
+            @include('modules.error-field', ['fieldName' => 'title'])
+        </div>
 
-        <label for='artist'>* Artist</label>
-        <input type='text' name='artist' id='artist' value='{{ old('artist', $poster->artist) }}'>
-        @include('modules.error-field', ['fieldName' => 'artist'])
+        <div class="form-group">
+            <label for='artist'>* Artist</label>
+            <input type='text' class="form-control" name='artist' id='artist' value='{{ old('artist', $poster->artist) }}'>
+            @include('modules.error-field', ['fieldName' => 'artist'])
+        </div>
 
-        <label for='variant'>Variant</label>
-        <input type='checkbox' name='variant' id='variant' value='variant'>
+        <div class="form-group">
+            <label for='cost'>* Cost</label>
+            <input type='text' class="form-control" name='cost' id='cost' value='{{ old('cost', $poster->cost) }} '>
+            @include('modules.error-field', ['fieldName' => 'cost'])
+        </div>
 
-        <label for='cost'>* cost</label>
-        <input type='text' name='cost' id='cost' value='{{ old('cost', $poster->cost) }} '>
-        @include('modules.error-field', ['fieldName' => 'cost'])
+        <div class="form-group">
+            <label for='image'>* Image URL </label>
+            <input type='text' class="form-control" max='4' name='image' id='image' value='{{ old('image', $poster->image) }}'>
+            @include('modules.error-field', ['fieldName' => 'image'])
+        </div>
 
-        <label for='image'>* Image URL </label>
-        <input type='text' max='4' name='image' id='image' value='{{ old('image', $poster->image) }}'>
-        @include('modules.error-field', ['fieldName' => 'image']) 
+        <div class="form-group">
+            <label for='notes'>Notes</label>
+            <input type='text' class="form-control" name='notes' id='notes' value='{{ old('notes', $poster->notes) }}'>
+            @include('modules.error-field', ['fieldName' => 'notes']) 
+        </div>
         
         @foreach ($tagsForCheckboxes as $id => $name)
             <input
@@ -42,7 +53,6 @@
             >
             {{ $name }} <br>
         @endforeach                
-             
 
         <input type='submit' value='Save changes' class='btn btn-primary btn-small'>
     </form>

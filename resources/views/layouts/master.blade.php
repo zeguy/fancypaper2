@@ -21,8 +21,8 @@
 			if(Auth::check()) {
 				$nav = [
 					'posters/breakeven' => 'Breakeven',
-					'posters/index' => 'Posters',
-					'posters/create' => 'Add a poster',
+					'posters/index' => 'Prints',
+					'posters/create' => 'Add Print',
 					'posters/sold' => 'Sales',
 				];
 			} else {
@@ -34,27 +34,28 @@
 			}
 		@endphp
 
-		<nav>
-			<ul>
-				@foreach($nav as $link => $label)
-					<li><a href='/{{ $link }}' class='{{ Request::is($link) ? 'active' : '' }}'>{{ $label }}</a>
-				@endforeach
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+			    <div class="navbar-header">
+           			<a class="navbar-brand" href="/">FancyPaper</a>
+         		</div>
+				<ul class="nav navbar-nav">
+					@foreach($nav as $link => $label)
+						<li><a href='/{{ $link }}' class='{{ Request::is($link) ? 'active' : '' }}'>{{ $label }}</a>
+					@endforeach
 
-				@if(Auth::check())
-					<li>
-						<form method='POST' id='logout' action='/logout'>
-							{{csrf_field()}}
-							<a href='#' onClick='document.getElementById("logout").submit();'>Logout {{ $user->name }}</a>
-						</form>
-					</li>
-				@endif
-			</ul>
+					@if(Auth::check())
+						<li>
+							<form method='POST' id='logout' action='/logout'>
+								{{csrf_field()}}
+								<a href='#' onClick='document.getElementById("logout").submit();'>Logout {{ $user->name }}</a>
+							</form>
+						</li>
+					@endif
+				</ul>
+			<div>
 		</nav>
   	</header>
-	
-	<section>
-    	@yield('subNav')
-	</section>
 
 	<section>
     	@yield('content')

@@ -60,17 +60,15 @@ Route::group(['middleware' => 'auth'], function () {
     #process the deletion
     Route::delete('/posters/{id}', 'PosterController@confirm');
 
-    Route::get('/posters/art', 'PosterController@art');
-    Route::get('/posters/collection', 'PosterController@collection');
-    Route::get('/posters/film', 'PosterController@film');
-    Route::get('/posters/inventory', 'PosterController@inventory');
+    Route::get('/posters/sorted/{tag}', 'PosterController@tagSort');
 
     Route::get('/posters/{id}/sell', 'PosterController@sell');
     Route::post('/posters/{id}', 'PosterController@sold');
 
     Route::get('/posters/sold', 'PosterController@record');
     Route::get('/posters/index', 'PosterController@index');
-	Route::get('/posters/{id}', 'PosterController@show');
+    Route::get('/posters/{id}', 'PosterController@show');
+    
 });
 
 Route::get('/show-login-status', function () {

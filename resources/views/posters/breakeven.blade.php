@@ -8,18 +8,23 @@
 
 		<legend><b>Breakeven Calculator:</b></legend>
 
-		<label for="cost">Print Cost:</label>
-		<input type="number" name="cost" id="cost" required="required" placeholder="required" min="0" step="0.01" value=''>
+        <div class="form-group">
+            <label for="cost">Print Cost:</label>
+            <input type="number" "form-control" name="cost" id="cost" required="required" placeholder="required" min="0" step="0.01" value=''>
+        </div>
 
 		<label for="platform">Platform:</label>
-			<select name="platform" id="platform">
+			<select name="platform" "form-control"  id="platform">
 				<option value="ebay">ebay</option>
 				<option value="expresso">expresso</option>
 				<option value="shopify">shopify</option>
 			</select>
 
-		<label for="shipping">Free Shipping:</label>
-		<input type="checkbox" name="shipping" id="shipping">
+		<div class="checkbox">
+            <label>
+            <input type="checkbox" name="shipping" id="shipping">Free Shipping:
+            </label>
+        </div>
 
 		<button type="submit" name="submit" value="Submit">Submit</button>
 

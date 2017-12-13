@@ -23,9 +23,9 @@ class CreatePostersTable extends Migration
             #my fields
             $table->string('title');
             $table->string('artist');
-            $table->boolean('variant')->nullable(); 
             $table->float('cost', 8 , 2);
             $table->string('image');
+            $table->string('notes')->nullable();
         });
     }
     /**
