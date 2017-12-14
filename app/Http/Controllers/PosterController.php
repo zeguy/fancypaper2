@@ -30,7 +30,7 @@ class PosterController extends Controller
     }
 
     /**
-    * GET /posters/art
+    * GET /posters/{tag}
     */
     public function tagSort(Request $request, $tag)
     {
@@ -65,7 +65,7 @@ class PosterController extends Controller
         }
         
         return view('posters.show')->with([
-            'poster' => $poster
+            'poster' => $poster,
         ]);
     }
 

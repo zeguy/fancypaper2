@@ -52,6 +52,6 @@
             {{ $name }} <br>
         @endforeach         
 
-        <input type='submit' value='Add Poster' class='btn btn-primary btn-small'>
+        <input type='submit' value='Add Print' class='btn btn-primary btn-small'>
     </form>
 @endsection
