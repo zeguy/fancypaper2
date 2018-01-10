@@ -6,11 +6,18 @@ use Illuminate\Http\Request;
 
 class BreakevenController extends Controller 
 {
+    /**
+    * GET /posters/breakeven
+    */
 	public function display() {
 		return view('posters.breakeven')->with([
 		    'message' => session('message')
 		]);
 	}
+
+	/**
+    * POST /posters/breakeven
+    */
 	public function calculate(Request $request) {
 		$this->validate($request, [
 			'cost' => 'required|min:0|numeric'

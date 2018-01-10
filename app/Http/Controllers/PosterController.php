@@ -30,7 +30,7 @@ class PosterController extends Controller
     }
 
     /**
-    * GET /posters/{tag}
+    * GET /posters/sorted/{tag}
     */
     public function tagSort(Request $request, $tag)
     {
@@ -54,7 +54,7 @@ class PosterController extends Controller
     }
 
     /**
-    * GET /posters/{$title}
+    * GET /posters/{id}
     */
     public function show($id)
     {
@@ -70,7 +70,7 @@ class PosterController extends Controller
     }
 
     /**
-    *
+    * GET /posters/create
     */
     public function create()
     {
@@ -81,7 +81,7 @@ class PosterController extends Controller
     }
 
     /**
-    *
+    * POST /posters
     */
     public function store(Request $request)
     {
@@ -113,7 +113,7 @@ class PosterController extends Controller
     }
 
     /**
-    * PUT /posters/{id}
+    * GET /posters/{id}/edit
     */
     public function edit($id)
     {
@@ -141,6 +141,9 @@ class PosterController extends Controller
             ]);
     }
 
+    /**
+    * PUT /posters/{id}
+    */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -179,6 +182,9 @@ class PosterController extends Controller
         return view('posters.delete')->with(['poster' => $poster]);
     }
 
+    /**
+    *DELETE /posters/{id}
+    */
     public function confirm(Request $request, $id)
     {
         $poster = Poster::find($id);
@@ -203,6 +209,9 @@ class PosterController extends Controller
         ]);
         }
 
+    /**
+    *POST /posters/{id}/
+    */
     public function sold(Request $request, $id) 
     {
         $poster = Poster::find($id);

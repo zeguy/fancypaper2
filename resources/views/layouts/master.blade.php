@@ -43,12 +43,14 @@
                     @foreach($nav as $link => $label)
                         <li><a href='/{{ $link }}' class='{{ Request::is($link) ? 'active' : '' }}'>{{ $label }}</a>
                     @endforeach
+                </ul>
 
+                <ul class="nav navbar-nav navbar-right">
                     @if(Auth::check())
                         <li>
                             <form method='POST' id='logout' action='/logout'>
                                 {{csrf_field()}}
-                                <a href='#' onClick='document.getElementById("logout").submit();'>Logout {{ $user->name }}</a>
+                                <a href='#' onClick='document.getElementById("logout").submit();'>Logout {{ ($user->name) }}</a>
                             </form>
                         </li>
                     @endif
