@@ -42,11 +42,11 @@ Route::get('/debug', function () {
         dump($debug);
     });
 
-#breakeven
+#breakeven routes
 Route::get('/posters/breakeven', 'BreakevenController@display');
 Route::post('/posters/breakeven', 'BreakevenController@calculate');
 
-#logged in 
+#logged in routes
 Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('/posters/create', 'PosterController@create');
