@@ -14,14 +14,8 @@ class PosterController extends Controller
     */
     public function index(Request $request)
     {
-        $user = $request->user();
         $tagsForCheckboxes = Tag::getForCheckboxes();
-        
-        if ($user) {
-            $posters= $user->posters()->orderBy('title')->get();    
-        } else {
-            $posters = [];
-        }
+        $posters= Poster::all();    
 
         return view('posters.index')->with([
             'posters' => $posters,
@@ -34,12 +28,11 @@ class PosterController extends Controller
     */
     public function tagSort(Request $request, $tag)
     {
-        $user = $request->user();
         $tagsForCheckboxes = Tag::getForCheckboxes();
         
         if ($tag == 'index')
         {
-            $posters= $user->posters()->orderBy('title')->get();
+            $posters= Poster::all();
         } else {
             $posters = Poster::whereHas('tags', function ($query) use ($tag)
             {
@@ -106,7 +99,6 @@ class PosterController extends Controller
         $poster->cost = $request->input('cost');
         $poster->image = $request->input('image');
         $poster->notes = $request->input('notes');
-        $poster->user_id = $request->user()->id;
         $poster->save();
 
         return redirect('/posters/index')->with('alert', 'the poster '.$request->input('title').' was added.');
@@ -244,7 +236,6 @@ class PosterController extends Controller
 			$sale->profit = $sale->cost - round(($poster->cost + 0.6)/0.942);
         }
         
-        $sale->user_id = $request->user()->id;
         $sale->save();
         $poster->tags()->detach();
         $poster->delete();
@@ -257,13 +248,9 @@ class PosterController extends Controller
     */
     public function record(Request $request)
     {
-        $user = $request->user();
         
-        if ($user) {
-            $sales = $user->sales()->get();
-        } else {
-            $sales = [];
-        }
+        $sales = Sale::all();
+
         return view('posters.record')->with([
             'sales' => $sales
         ]);

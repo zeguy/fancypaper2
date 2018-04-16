@@ -9,6 +9,8 @@
     <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="/css/fancypaper2.css">
 
+    @stack('head')
+
 </head>
 <body>
 
@@ -19,17 +21,26 @@
             # because it's display specific and allows you to edit the link
             # labels without having to edit a logic file.
             if(Auth::check()) {
-                $nav = [
-                    'posters/breakeven' => 'Breakeven',
-                    'posters/index' => 'Prints',
-                    'posters/create' => 'Add Print',
-                    'posters/sold' => 'Sales',
-                ];
+                if(Auth::user()->role=="admin") {
+                    $nav = [
+                        'posters/breakeven' => 'Breakeven',
+                        'posters/index' => 'Prints',
+                        'posters/create' => 'Add Print',
+                        'posters/sold' => 'Sales',
+                    ];
+                } else {
+                    $nav = [
+                        #'posters/breakeven' => 'Breakeven',
+                        'posters/index' => 'Prints',
+                        #'posters/create' => 'Add Print',
+                        'posters/sold' => 'Sales',
+                    ];
+                }
             } else {
                 $nav = [
                     'register' => 'Register',
                     'login' => 'Login',
-                    'posters/breakeven' => 'Breakeven',
+                    #'posters/breakeven' => 'Breakeven',
                 ];
             }
         @endphp
@@ -37,7 +48,7 @@
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                       <a class="navbar-brand" href="/">FancyPaper</a>
+                       <a class="navbar-left" href="/"><img src="/img/home.png"></a>
                  </div>
                 <ul class="nav navbar-nav">
                     @foreach($nav as $link => $label)
@@ -66,7 +77,7 @@
     <footer class="container-fluid text-center">
           <div class="footer-copyright">
             <div class="container-fluid">
-                © 2017 Copyright: <a href="https://p1.zeguy.me"> ZeGuy </a>
+                © 2018
             </div>
         </div>
     </footer>

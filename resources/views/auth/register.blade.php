@@ -1,28 +1,39 @@
 @extends('layouts.master')
 
 @section('content')
-    <h1>Register</h1>
+    <h1>New Account</h1><br>
 
-    Already have an account? <a href='/login'>Login here...</a>
+    Already have an account? <a href='/login'>Login here...</a><br><br>
 
     <form method="POST" action="{{ route('register') }}">
         {{ csrf_field() }}
 
-        <label for="name">Name</label>
-        <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus>
-        @include('modules.error-field', ['fieldName' => 'name'])
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input class="form-control" id="name" type="text" name="name" value="{{ old('name') }}" required autofocus>
+            @include('modules.error-field', ['fieldName' => 'name'])
+        </div>
 
-        <label for="email">E-Mail Address</label>
-        <input id="email" type="email" name="email" value="{{ old('email') }}" required>
-        @include('modules.error-field', ['fieldName' => 'email'])
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input class="form-control" id="email" type="email" name="email" value="{{ old('email') }}" required>
+            @include('modules.error-field', ['fieldName' => 'email'])
+        </div>
 
-        <label for="password">Password (min: 6)</label>
-        <input id="password" type="password" name="password" required>
-        @include('modules.error-field', ['fieldName' => 'password'])
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input class="form-control" id="password" type="password" name="password" required>
+            @include('modules.error-field', ['fieldName' => 'password'])
+        </div>
 
-        <label for="password-confirm">Confirm Password</label>
-        <input id="password-confirm" type="password" name="password_confirmation" required>
+        <div class="form-group">
+            <label for="password-confirm">Confirm Password:</label>
+            <input class="form-control" id="password-confirm" type="password" name="password_confirmation" required>
+        </div>
 
-        <button type="submit" class="btn btn-primary">Register</button>
+        <br>
+        
+        <button type="submit" class="btn btn-dark">Register</button>
     </form>
+    <br>
 @endsection

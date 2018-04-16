@@ -9,20 +9,26 @@
     <form method="POST" action="{{ route('login') }}">
 
         {{ csrf_field() }}
+        
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input class="form-control" id="email" type="email" name="email" value="{{ old('email') }}" required autofocus>
+            @include('modules.error-field', ['fieldName' => 'email'])
+        </div>
 
-        <label for="email">E-Mail Address</label>
-        <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus>
-        @include('modules.error-field', ['fieldName' => 'email'])
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input class="form-control" id="password" type="password" name="password" required>
+            @include('modules.error-field', ['fieldName' => 'password'])
+        </div>
 
-        <label for="password">Password</label>
-        <input id="password" type="password" name="password" required>
-        @include('modules.error-field', ['fieldName' => 'password'])
+        <div class="form-group">
+            <label>
+                Remember me:<input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> 
+            </label>
+        </div>
 
-        <label>
-            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-        </label>
-
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-dark">Login</button> <br>
 
         <a class="btn btn-link" href="{{ route('password.request') }}">Forgot Your Password?</a>
         
