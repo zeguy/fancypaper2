@@ -9,7 +9,6 @@
 @endsection
 
 @section('content')
-	
     <section>
         <table class='table table-striped table-bordered'>
             <thead>
