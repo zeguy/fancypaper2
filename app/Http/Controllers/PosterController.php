@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
 use Illuminate\Http\Request;
 use App\Poster;
 use App\Tag;
 use App\Sale;
+
+
 
 class PosterController extends Controller
 {
@@ -57,9 +59,15 @@ class PosterController extends Controller
             return redirect('/posters')->with('alert','poster not found');
         }
         
-        return view('posters.show')->with([
-            'poster' => $poster,
+        if(Auth::user()->role=="admin") {
+            return view('posters.showAdmin')->with([
+                'poster' => $poster,
         ]);
+        } else {
+            return view('posters.show')->with([
+                'poster' => $poster,
+        ]);
+        }
     }
 
     /**

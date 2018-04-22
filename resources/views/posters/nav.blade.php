@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-
     <header>
         <nav class="navbar navbar-light">
               <div class="container-fluid">

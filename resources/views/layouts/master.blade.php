@@ -46,27 +46,38 @@
         @endphp
 
         <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                       <a class="navbar-left" href="/"><img src="/img/home.png"></a>
-                 </div>
-                <ul class="nav navbar-nav">
-                    @foreach($nav as $link => $label)
-                        <li><a href='/{{ $link }}' class='{{ Request::is($link) ? 'active' : '' }}'>{{ $label }}</a>
-                    @endforeach
-                </ul>
+                 <ul class="nav navbar-nav navbar-right">
+                        <div class="container-fluid">
+                            @if(Auth::check())
+                                <li>
+                                    <form method='POST' id='logout' action='/logout'>
+                                        {{csrf_field()}}
+                                        <a href='#' onClick='document.getElementById("logout").submit();'>logout ({{$user->name}})</a>
+                                    </form>
+                                </li>
+                            @endif
+                        </div>
+                    </ul>
 
-                <ul class="nav navbar-nav navbar-right">
-                    @if(Auth::check())
-                        <li>
-                            <form method='POST' id='logout' action='/logout'>
-                                {{csrf_field()}}
-                                <a href='#' onClick='document.getElementById("logout").submit();'>Logout {{ ($user->name) }}</a>
-                            </form>
-                        </li>
-                    @endif
-                </ul>
-            </div>
+                <div class="navbar-header">
+
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                        </button>
+
+                    <a class="navbar-brand" href="/"><img class="img-responsive" alt='Ze Gallerie' src="/img/home.png"></a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="myNavbar">
+                            <ul class="nav navbar-nav">
+                                @foreach($nav as $link => $label)
+                                    <li><a href='/{{ $link }}' class='{{ Request::is($link) ? 'active' : '' }}'>{{ $label }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                </div>
         </nav>
       </header>
 
@@ -81,6 +92,10 @@
             </div>
         </div>
     </footer>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </body> 
 </html>

@@ -12,46 +12,44 @@ a {
 
 .navbar {
     background-color: black;
+    margin-bottom: 25px;
 
+}
+
+.navbar-header{
+  text-align:center;
 }
 
 .navbar-inverse .navbar-nav>li>a{
-  text-decoration: none; /*removes link underlines*/
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  transition: all 0.5s;	
-  padding:20px;
+  text-decoration: none; /*removes link underlines*/	  
   color: rgb(131, 6, 248);
-  font-size: 30px;
   font-family: Anton;
 }
 
-.navbar-inverse .navbar-nav>li>a:hover{
-  -webkit-animation: neon 1.5s ease-in-out infinite alternate;
-  -moz-animation: neon 1.5s ease-in-out infinite alternate;
-  animation: neon 1.5s ease-in-out infinite alternate;  
-  color: rgb(252, 123, 17);
-  background-color: transparent;
+.navbar-inverse .navbar-nav>li>a:hover{ 
+  color: #FE0062;
 }
 
 .navbar-nav>li>a {
-  text-decoration: none; /*removes link underlines*/
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  transition: all 0.5s;	
-  padding:20px;
-  font-size: 20px;
+  text-decoration: none; /*removes link underlines*/	
   color: rgb(131, 6, 248);
-  background-color: transparent;
   font-family: anton;
 }
 
-.navbar-nav>li>a:hover{
-  -webkit-animation: neon 1.5s ease-in-out infinite alternate;
-  -moz-animation: neon 1.5s ease-in-out infinite alternate;
-  animation: neon 1.5s ease-in-out infinite alternate;  
-  color: rgb(252, 123, 17);
-  background-color: transparent
+.navbar-nav>li>a:hover{  
+  color: #FE0062;
+  background-color: transparent;
+}
+
+.navbar-inverse .navbar-toggle .icon-bar {
+  background-color: #FE0062;
+}
+
+.navbar-inverse .navbar-toggle {
+  float: none;
+  margin-right:0;
+  border-color: #7015c1;
+
 }
 
 a.btn {
@@ -61,7 +59,11 @@ a.btn {
 }
 
 #logout > a {
-  color: red;
+  color: #FE0062;
+}
+
+.navbar-right{
+  text-align:center;
 }
   
 body > section{
@@ -129,31 +131,4 @@ footer{
   -webkit-column-count: 1;
   column-count:         1;
   }
-}
-
-@keyframes neon {
-  from {
-    text-shadow: 0 0 10px #FE0062, 0 0 20px #FE0062, 0 0 30px #FE0062, 0 0 40px #7015c1, 0 0 70px #7015c1, 0 0 80px #7015c1, 0 0 100px #7015c1, 0 0 150px #7015c1;
-  }
-  to {
-    text-shadow: 0 0 5px #FE0062, 0 0 10px #FE0062, 0 0 15px #FE0062, 0 0 20px #7015c1, 0 0 35px #7015c1, 0 0 40px #7015c1, 0 0 50px #7015c1, 0 0 75px #7015c1;
-  }
-}
-
-@-moz-keyframes neon {
-  from {
-    text-shadow: 0 0 10px #FE0062, 0 0 20px #FE0062, 0 0 30px #FE0062, 0 0 40px #7015c1, 0 0 70px #7015c1, 0 0 80px #7015c1, 0 0 100px #7015c1, 0 0 150px #7015c1;
-  }
-  to {
-    text-shadow: 0 0 5px #FE0062, 0 0 10px #FE0062, 0 0 15px #FE0062, 0 0 20px #7015c1, 0 0 35px #7015c1, 0 0 40px #7015c1, 0 0 50px #7015c1, 0 0 75px #7015c1;
-  }
-}
-
-@-webkit-keyframes neon {
-  from {
-    text-shadow: 0 0 10px #FE0062, 0 0 20px #FE0062, 0 0 30px #FE0062, 0 0 40px #7015c1, 0 0 70px #7015c1, 0 0 80px #7015c1, 0 0 100px #7015c1, 0 0 150px #7015c1;
-  }
-  to {
-    text-shadow: 0 0 5px #FE0062, 0 0 10px #FE0062, 0 0 15px #FE0062, 0 0 20px #7015c1, 0 0 35px #7015c1, 0 0 40px #7015c1, 0 0 50px #7015c1, 0 0 75px #7015c1;
-  }  
 }
