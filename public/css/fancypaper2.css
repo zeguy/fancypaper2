@@ -6,18 +6,26 @@ body {
     color:  #FE0062;
 }
 
+h1 {
+  font-family: Anton;
+}
+
 a {
   color: #7015c1;
 }
 
+
 .navbar {
     background-color: black;
     margin-bottom: 25px;
-
 }
 
 .navbar-header{
   text-align:center;
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+  border-color: transparent;
 }
 
 .navbar-inverse .navbar-nav>li>a{
@@ -28,6 +36,10 @@ a {
 
 .navbar-inverse .navbar-nav>li>a:hover{ 
   color: #FE0062;
+}
+
+.navbar-nav{
+  margin-top:1em;
 }
 
 .navbar-nav>li>a {
@@ -53,9 +65,7 @@ a {
 }
 
 a.btn {
-  font-style: italic;
-  font-weight: bold;
-  color: #7015c1;
+  color: #FE0062;
 }
 
 #logout > a {
@@ -71,12 +81,20 @@ body > section{
   margin:auto;
 }
 
+.form-control{
+  width: auto;
+  margin: auto;
+  background-color:#7015c1;
+  color: #FE0062;
+}
+
 .form-group {
   margin:auto;
 }
-.form-control {
-  width: auto;
-  margin: auto;
+
+button.btn{
+  background-color:#7015c1;
+  color: #FE0062;
 }
 
 footer{
